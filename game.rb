@@ -45,7 +45,9 @@ class Hangman
             guess = gets.chomp
 
             right_choice = @word.first.include? guess
-            if right_choice
+            if guess == "exit"
+                puts "Thanks for playing!"
+            elsif right_choice
                 puts "You picked correct!"
 
                 @correct_choice << guess
@@ -64,6 +66,7 @@ class Hangman
      end
 
     def begin
+        puts "To exit the game just type the word exit"
         puts "Your word has #{@word.first.length} letters"
         tease
         puts "Lets get the game started. your clue is it #{@word.last}"
