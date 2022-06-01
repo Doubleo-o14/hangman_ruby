@@ -1,9 +1,7 @@
 class Hangman
     def initialize 
-        @letters = ('a'..'z').to_a
         @word = words.sample
         @lives = 7
-        @correct_choice = []
         @word_tease = ""
 
         @word.first.length.times do
@@ -50,11 +48,13 @@ class Hangman
             elsif right_choice
                 puts "You picked correct!"
 
-                @correct_choice << guess
-                @letters.delete guess
-
                 tease guess
-                make_guess
+                if @word.first == @word_tease.split.join
+                    puts "Congrats! you saved yourself and won this round."
+                else
+                    make_guess
+                end
+        
             else
                 @lives -= 1
                 puts "Your wrong try again, you have #{@lives} tries left."
