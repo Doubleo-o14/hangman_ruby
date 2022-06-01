@@ -2,6 +2,7 @@ class Hangman
     def initialize 
         @letters = ('a'..'z').to_a
         @word = words.sample
+        @lives = 7
     end
 
     def words
@@ -24,14 +25,20 @@ class Hangman
     end
 
     def make_guess
-        puts "enter a letter"
-        guess = gets.chomp
+        if @lives > 0
+            puts "enter a letter"
+            guess = gets.chomp
 
-        right_choice = @word.first.include? guess
-        if right_choice
-            puts "You picked correct!"
+            right_choice = @word.first.include? guess
+            if right_choice
+                puts "You picked correct!"
+            else
+                @lives -= 1
+                puts "Your wrong try again, you have #{@lives} tries left."
+                make_guess
+            end
         else
-            puts "Your wrong try again."
+            puts "Sorry you failed to save yourself.Game over."
         end
      end
 
